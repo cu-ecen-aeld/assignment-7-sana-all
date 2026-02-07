@@ -34,8 +34,13 @@
 #include <linux/ioport.h>
 #include <linux/poll.h>
 
-#include <asm/io.h>
-#include <asm/uaccess.h>
+// former asm like below
+#include <linux/io.h> 
+#include <linux/uaccess.h>
+
+// this is too old.
+//#include <asm/io.h>
+//#include <asm/uaccess.h>
 
 int silly_major = 0;
 module_param(silly_major, int, 0);
