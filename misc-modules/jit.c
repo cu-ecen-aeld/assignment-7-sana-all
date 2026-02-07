@@ -31,7 +31,7 @@
 #include <linux/sched/signal.h>
 #include <linux/slab.h>
 #include <linux/version.h>
-#include <asm/hardirq.h>
+#include <linux/hardirq.h>
 
 #include "proc_ops_version.h"
 /*
