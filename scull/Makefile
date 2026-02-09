@@ -23,23 +23,18 @@ obj-m	:= scull.o
 
 else
 
-KERNELDIR ?= /lib/modules/$(shell uname -r)/build
+# The kernel source tree must be passed in from the environment
+# (Yocto recipe sets KERNEL_SRC). Do not default to host /lib/modules.
 PWD       := $(shell pwd)
 
 modules:
-	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+    $(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules
 
-endif
-
-
+modules_install:
+    $(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules_install
 
 clean:
-	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions *.mod modules.order *.symvers
+    $(MAKE) -C $(KERNEL_SRC) M=$(PWD) clean
 
-depend .depend dep:
-	$(CC) $(EXTRA_CFLAGS) -M *.c > .depend
-
-
-ifeq (.depend,$(wildcard .depend))
-include .depend
 endif
+
